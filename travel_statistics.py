@@ -43,14 +43,14 @@ def qtde_tickets(line, tickets, day, match, arrival):
 
 
 # Armazena em uma variável as viagens não monitoradas
-# data_travel = 'files_data/relatorio_viagens_nao_monitoradas_outubro_2024.csv'
-data_travel = 'files_data/gla1.csv'
+data_travel = 'files_data/relatorio_viagens_nao_monitoradas_outubro_2024.csv'
+# data_travel = 'files_data/gla1.csv'
 
 dt = pd.read_csv(data_travel, encoding='utf-8-sig', sep=',')
 
 # Armazena em uma variável a bilhetagem
-# data_bilhetagem = 'files_data/bilhetagem_eletronica_outubro_2024.csv'
-data_ticketing = 'files_data/gla.csv'
+data_ticketing = 'files_data/bilhetagem_eletronica_outubro_2024.csv'
+# data_ticketing = 'files_data/gla.csv'
 db = pd.read_csv(data_ticketing, encoding='utf-8-sig', sep=';')
 
 # Exibe o conteúdo dos arquivos
