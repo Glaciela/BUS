@@ -50,8 +50,8 @@ dt = pd.read_csv(data_travel, encoding='utf-8-sig', sep=',')
 
 # Armazena em uma variável a bilhetagem
 # data_bilhetagem = 'files_data/bilhetagem_eletronica_outubro_2024.csv'
-data_bilhetagem = 'files_data/gla.csv'
-db = pd.read_csv(data_bilhetagem, encoding='utf-8-sig', sep=';')
+data_ticketing = 'files_data/gla.csv'
+db = pd.read_csv(data_ticketing, encoding='utf-8-sig', sep=';')
 
 # Exibe o conteúdo dos arquivos
 print(dt.head())
@@ -80,9 +80,9 @@ dt['QTDE TICKETS'] = dt.apply(
 
 
 # Salva a nova tabela em um novo arquivo CSV
-novo_arquivo = 'files_data/viagens_nao_mon_OUT24_atualizada.csv'
-dt.to_csv(novo_arquivo, index=False, encoding='utf-8-sig', sep=';')
+new_file = 'files_data/viagens_nao_mon_OUT24_atualizada.csv'
+dt.to_csv(new_file, index=False, encoding='utf-8-sig', sep=';')
 
-print(f'Arquivo {novo_arquivo} criado com sucesso!')
+print(f'Arquivo {new_file} criado com sucesso!')
 
 
