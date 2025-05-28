@@ -49,6 +49,12 @@ travel_prog.insert(6, 'Porcentagem',
     )
 )
 
+# Converte a coluna 'Inicio da Operação' para o formato de data desejado (por exemplo, dd/mm/yyyy)
+travel_prog['Inicio da Operação'] = pd.to_datetime(travel_prog['Inicio da Operação'], origin='1899-12-30', unit='D')
+
+# Ordena travel_prog pela coluna 'Porcentagem' em ordem decrescente
+travel_prog.sort_values(by='Porcentagem', ascending=False, inplace=True)
+
 # Salva a nova tabela em um novo arquivo CSV
 new_file = 'files_data/n_viagens_programadas_outubro_2024_atualizado.csv'
 travel_prog.to_csv(new_file, index=False, encoding='utf-8-sig', sep=';')

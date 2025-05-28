@@ -33,13 +33,16 @@ def compare_dates_hours(day, match, arrival, dayhour):
 
 # Função para retornar a quantidade de bilhetes
 # Que está no arquivo de bilhetagem (tickets)
-# Para determinada linha, dia e horário
-def qtde_tickets(line, tickets, day, match, arrival):
+# Para determinada linha, tabela, dia e horário
+def qtde_tickets(line, table, tickets, day, match, arrival):
     qtde = 0
     for i in range(tickets.shape[0]):
         ticket_line = tickets['LINHA'].iloc[i]
+        ticket_table = tickets['TABELA'].iloc[i]
         ticket_dayhours = tickets['DATAHORA'].iloc[i]
-        if ticket_line == line and compare_dates_hours(day, match, arrival, ticket_dayhours):
+
+        if  f'{ticket_table}' == table and ticket_line == line and compare_dates_hours(day, match, arrival, ticket_dayhours):
+        # if  ticket_line == line and compare_dates_hours(day, match, arrival, ticket_dayhours):
             qtde += 1
     return qtde
 
@@ -52,7 +55,11 @@ dt = pd.read_csv(data_travel, encoding='utf-8-sig', sep=',')
 data_ticketing = 'files_data/bilhetagem_eletronica_outubro_2024.csv'
 db = pd.read_csv(data_ticketing, encoding='utf-8-sig', sep=';')
 
-# Armazena em uma variável as linhas de ônibus
+print(dt.head())
+print(db.head())
+
+# Armazena em uma variável todas as linhas de ônibus
+# Contidas no arquivo de viagens não monitoradas
 unique_lines = dt['Linha'].unique().tolist()
 
 # Cria um diretório para a linha, se não existir
@@ -98,7 +105,7 @@ for day in business_days_out_2024:
         # Aplica a função para cada linha do arquivo 
         # Acrescentando uma nova coluna com a quantidade de tickets
         dt['QTDE TICKETS'] = dt.apply(
-            lambda row: qtde_tickets(row['Linha'], db, row['Dia'], row['Partida'], row['Chegada']),
+            lambda row: qtde_tickets(row['Linha'], row['Referência'], db, row['Dia'], row['Partida'], row['Chegada']),
             axis=1
         )
         
@@ -112,6 +119,8 @@ for day in business_days_out_2024:
         dt.to_csv(new_file, index=False, encoding='utf-8-sig', sep=';')
         
         print(f'Arquivo {new_file} criado com sucesso!')
+
+    
 
 
 

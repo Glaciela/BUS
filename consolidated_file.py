@@ -18,6 +18,11 @@ business_days_out_2024 = [
     "30/10", "31/10"
     ]
 
+# Armazena em uma variável todas as pastas 
+# Dentro de 'files_data/LineBus'
+# Que contem as linhas de ônibus
+# Transforma a lista de pastas em inteiros
+# E ordena os números das linhas
 folders = sorted([name for name in os.listdir('files_data/LineBus') if os.path.isdir(os.path.join('files_data/LineBus', name))])
 folders = [int(name) for name in folders if name.isdigit()]
 folders.sort()
@@ -32,6 +37,7 @@ dfs = []
 for day in business_days_out_2024:
     print(f'Processando dados para o dia: {day}')
     for line in folders:
+        # Extrai os dois primeiros números de 'day'
         day_prefix = day[:2]
         # Caminho para o arquivo CSV
         file_path = f'files_data/LineBus/{line}/{line}_viagens_nao_mon_{day_prefix}OUT24_atualizada.csv'
